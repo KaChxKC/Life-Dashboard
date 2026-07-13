@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Tasks from './pages/Tasks';
 import Pomodoro from './pages/Pomodoro';
-import Expenses from './pages/Expenses';
+import Budget from './pages/Budget';
 
 function Loader() {
   return (
@@ -42,7 +42,7 @@ export default function App() {
         <Route index element={<Dashboard />} />
         <Route path="tasks" element={<Tasks />} />
         <Route path="pomodoro" element={<Pomodoro />} />
-        <Route path="expenses" element={<Expenses />} />
+        <Route path="budget" element={<Budget />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

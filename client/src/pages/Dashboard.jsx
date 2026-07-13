@@ -80,13 +80,24 @@ export default function Dashboard() {
 
   const habitsDone = dailyHabits.filter(isDoneToday).length;
 
-  const todaySpend = useMemo(
-    () =>
-      expenses
-        .filter((e) => todayStr(e.date) === todayStr())
-        .reduce((s, e) => s + e.amount, 0),
-    [expenses]
-  );
+  const monthKey = (() => {
+    const n = new Date();
+    return `${n.getFullYear()}-${n.getMonth()}`;
+  })();
+
+  const { monthIncome, monthExpense } = useMemo(() => {
+    let inc = 0;
+    let exp = 0;
+    for (const e of expenses) {
+      const d = new Date(e.date);
+      if (`${d.getFullYear()}-${d.getMonth()}` !== monthKey) continue;
+      if (e.type === 'income') inc += e.amount;
+      else exp += e.amount;
+    }
+    return { monthIncome: inc, monthExpense: exp };
+  }, [expenses, monthKey]);
+
+  const monthBalance = monthIncome - monthExpense;
 
   const openTaskCount = tasks.filter(
     (t) => t.type !== 'daily' && !t.completed
@@ -143,9 +154,14 @@ export default function Dashboard() {
         />
         <StatCard
           icon={Wallet}
-          label="Spent today"
-          value={formatMoney(todaySpend)}
-          accent="bg-amber-500/15 text-amber-400"
+          label="Balance this month"
+          value={formatMoney(monthBalance)}
+          sub={`${formatMoney(monthIncome)} in · ${formatMoney(monthExpense)} out`}
+          accent={
+            monthBalance >= 0
+              ? 'bg-amber-500/15 text-amber-400'
+              : 'bg-rose-500/15 text-rose-400'
+          }
         />
       </div>
 

@@ -12,7 +12,7 @@ const nav = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
   { to: '/tasks', label: 'Tasks', icon: ListChecks },
   { to: '/pomodoro', label: 'Pomodoro', icon: Timer },
-  { to: '/expenses', label: 'Expenses', icon: Wallet },
+  { to: '/budget', label: 'Budget', icon: Wallet },
 ];
 
 export default function Layout() {

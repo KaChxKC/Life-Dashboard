@@ -35,6 +35,17 @@ export const EXPENSE_CATEGORIES = [
   'Other',
 ];
 
+export const INCOME_CATEGORIES = [
+  'Salary',
+  'Allowance',
+  'Freelance',
+  'Scholarship',
+  'Gift',
+  'Other',
+];
+
+export const INCOME_COLOR = '#34d399';
+
 export const CATEGORY_COLORS = {
   Food: '#f59e0b',
   Transport: '#38bdf8',

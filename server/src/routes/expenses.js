@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { amount, category, note, date } = req.body;
+    const { amount, type, category, note, date } = req.body;
     const value = Number(amount);
     if (!Number.isFinite(value) || value < 0) {
       return res.status(400).json({ message: 'A valid amount is required' });
@@ -20,6 +20,7 @@ router.post('/', async (req, res) => {
     const expense = await Expense.create({
       userId: req.userId,
       amount: value,
+      type: type === 'income' ? 'income' : 'expense',
       category: category || 'Other',
       note,
       date: date || Date.now(),
@@ -31,10 +32,10 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-  const { amount, category, note, date } = req.body;
+  const { amount, type, category, note, date } = req.body;
   const expense = await Expense.findOneAndUpdate(
     { _id: req.params.id, userId: req.userId },
-    { amount, category, note, date },
+    { amount, type, category, note, date },
     { new: true, runValidators: true }
   );
   if (!expense) return res.status(404).json({ message: 'Expense not found' });
