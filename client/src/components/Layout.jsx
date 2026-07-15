@@ -7,6 +7,7 @@ import {
   LogOut,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import Footer from './Footer';
 
 const nav = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
@@ -79,10 +80,11 @@ export default function Layout() {
         </div>
       </aside>
 
-      <main className="flex-1 overflow-y-auto">
-        <div className="mx-auto max-w-6xl px-5 py-6 md:px-8 md:py-8">
+      <main className="flex flex-1 flex-col overflow-y-auto">
+        <div className="mx-auto w-full max-w-6xl flex-1 px-5 py-6 md:px-8 md:py-8">
           <Outlet />
         </div>
+        <Footer />
       </main>
     </div>
   );
