@@ -6,10 +6,10 @@ export const TASK_TYPES = [
 ];
 
 export const TYPE_STYLES = {
-  daily: 'bg-emerald-500/15 text-emerald-300',
-  assignment: 'bg-amber-500/15 text-amber-300',
-  roadmap: 'bg-sky-500/15 text-sky-300',
-  goal: 'bg-violet-500/15 text-violet-300',
+  daily: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300',
+  assignment: 'bg-amber-500/15 text-amber-700 dark:text-amber-300',
+  roadmap: 'bg-sky-500/15 text-sky-700 dark:text-sky-300',
+  goal: 'bg-violet-500/15 text-violet-700 dark:text-violet-300',
 };
 
 export const PRIORITIES = [
@@ -19,9 +19,9 @@ export const PRIORITIES = [
 ];
 
 export const PRIORITY_STYLES = {
-  low: 'bg-slate-500/15 text-slate-300',
-  medium: 'bg-blue-500/15 text-blue-300',
-  high: 'bg-red-500/15 text-red-300',
+  low: 'bg-slate-500/15 text-fg-300',
+  medium: 'bg-blue-500/15 text-blue-700 dark:text-blue-300',
+  high: 'bg-red-500/15 text-red-700 dark:text-red-300',
 };
 
 export const EXPENSE_CATEGORIES = [

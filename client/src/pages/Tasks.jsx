@@ -126,8 +126,8 @@ export default function Tasks() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-100">Tasks</h1>
-          <p className="text-sm text-slate-500">
+          <h1 className="text-2xl font-semibold text-fg-100">Tasks</h1>
+          <p className="text-sm text-fg-500">
             Goals, assignments, roadmap steps and daily habits.
           </p>
         </div>
@@ -144,7 +144,7 @@ export default function Tasks() {
             className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors ${
               filter === f.value
                 ? 'bg-indigo-500 text-white'
-                : 'bg-ink-800 text-slate-400 hover:text-slate-200'
+                : 'bg-ink-800 text-fg-400 hover:text-fg-200'
             }`}
           >
             {f.label}
@@ -153,7 +153,7 @@ export default function Tasks() {
       </div>
 
       {loading ? (
-        <p className="text-sm text-slate-500">Loading…</p>
+        <p className="text-sm text-fg-500">Loading…</p>
       ) : filtered.length === 0 ? (
         <EmptyState
           icon={ListChecks}
@@ -184,7 +184,7 @@ export default function Tasks() {
                   <div className="flex flex-wrap items-center gap-2">
                     <span
                       className={`font-medium ${
-                        done ? 'text-slate-500 line-through' : 'text-slate-100'
+                        done ? 'text-fg-500 line-through' : 'text-fg-100'
                       }`}
                     >
                       {t.title}
@@ -196,16 +196,16 @@ export default function Tasks() {
                       {t.priority}
                     </Badge>
                     {t.type === 'daily' && t.streak > 0 && (
-                      <Badge className="bg-orange-500/15 text-orange-300">
+                      <Badge className="bg-orange-500/15 text-orange-700 dark:text-orange-300">
                         <Flame size={12} className="mr-0.5" /> {t.streak}
                       </Badge>
                     )}
                   </div>
                   {t.description && (
-                    <p className="mt-1 text-sm text-slate-400">{t.description}</p>
+                    <p className="mt-1 text-sm text-fg-400">{t.description}</p>
                   )}
                   {t.dueDate && (
-                    <p className="mt-1 flex items-center gap-1 text-xs text-slate-500">
+                    <p className="mt-1 flex items-center gap-1 text-xs text-fg-500">
                       <CalendarDays size={13} />
                       Due {format(new Date(t.dueDate), 'MMM d, yyyy')}
                     </p>
@@ -215,13 +215,13 @@ export default function Tasks() {
                 <div className="flex shrink-0 gap-1 opacity-0 transition-opacity group-hover:opacity-100">
                   <button
                     onClick={() => openEdit(t)}
-                    className="rounded-md p-1.5 text-slate-500 hover:bg-ink-800 hover:text-slate-200"
+                    className="rounded-md p-1.5 text-fg-500 hover:bg-ink-800 hover:text-fg-200"
                   >
                     <Pencil size={16} />
                   </button>
                   <button
                     onClick={() => remove(t)}
-                    className="rounded-md p-1.5 text-slate-500 hover:bg-ink-800 hover:text-red-400"
+                    className="rounded-md p-1.5 text-fg-500 hover:bg-ink-800 hover:text-red-600 dark:hover:text-red-400"
                   >
                     <Trash2 size={16} />
                   </button>

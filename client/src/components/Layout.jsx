@@ -5,8 +5,11 @@ import {
   Timer,
   Wallet,
   LogOut,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import Footer from './Footer';
 
 const nav = [
@@ -18,6 +21,7 @@ const nav = [
 
 export default function Layout() {
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -26,7 +30,7 @@ export default function Layout() {
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-500 font-bold text-white">
             L
           </div>
-          <span className="hidden text-lg font-semibold text-slate-100 md:block">
+          <span className="hidden text-lg font-semibold text-fg-100 md:block">
             Life
           </span>
         </div>
@@ -40,8 +44,8 @@ export default function Layout() {
               className={({ isActive }) =>
                 `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
                   isActive
-                    ? 'bg-indigo-500/15 text-indigo-300'
-                    : 'text-slate-400 hover:bg-ink-800 hover:text-slate-200'
+                    ? 'bg-indigo-500/15 text-indigo-700 dark:text-indigo-300'
+                    : 'text-fg-400 hover:bg-ink-800 hover:text-fg-200'
                 }`
               }
             >
@@ -50,6 +54,23 @@ export default function Layout() {
             </NavLink>
           ))}
         </nav>
+
+        <div className="px-2 md:px-3">
+          <button
+            onClick={toggleTheme}
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-fg-400 transition-colors hover:bg-ink-800 hover:text-fg-200"
+          >
+            {theme === 'dark' ? (
+              <Sun size={20} className="shrink-0" />
+            ) : (
+              <Moon size={20} className="shrink-0" />
+            )}
+            <span className="hidden md:block">
+              {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+            </span>
+          </button>
+        </div>
 
         <div className="mt-auto border-t border-ink-800 px-2 pt-3 md:px-3">
           <div className="flex items-center gap-3 rounded-lg px-2 py-2">
@@ -64,15 +85,15 @@ export default function Layout() {
               <div className="h-8 w-8 shrink-0 rounded-full bg-ink-700" />
             )}
             <div className="hidden min-w-0 flex-1 md:block">
-              <p className="truncate text-sm font-medium text-slate-200">
+              <p className="truncate text-sm font-medium text-fg-200">
                 {user?.name}
               </p>
-              <p className="truncate text-xs text-slate-500">{user?.email}</p>
+              <p className="truncate text-xs text-fg-500">{user?.email}</p>
             </div>
             <button
               onClick={logout}
               title="Log out"
-              className="hidden rounded-md p-1.5 text-slate-500 hover:bg-ink-800 hover:text-red-400 md:block"
+              className="hidden rounded-md p-1.5 text-fg-500 hover:bg-ink-800 hover:text-red-600 dark:hover:text-red-400 md:block"
             >
               <LogOut size={18} />
             </button>

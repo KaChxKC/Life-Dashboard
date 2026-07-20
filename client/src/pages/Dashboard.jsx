@@ -32,9 +32,9 @@ function StatCard({ icon: Icon, label, value, sub, accent }) {
         <Icon size={22} />
       </div>
       <div>
-        <p className="text-sm text-slate-500">{label}</p>
-        <p className="text-xl font-semibold text-slate-100">{value}</p>
-        {sub && <p className="text-xs text-slate-500">{sub}</p>}
+        <p className="text-sm text-fg-500">{label}</p>
+        <p className="text-xl font-semibold text-fg-100">{value}</p>
+        {sub && <p className="text-xs text-fg-500">{sub}</p>}
       </div>
     </Card>
   );
@@ -123,10 +123,10 @@ export default function Dashboard() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-semibold text-slate-100">
+        <h1 className="text-2xl font-semibold text-fg-100">
           {greeting}, {user?.name?.split(' ')[0] || 'there'} 👋
         </h1>
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-fg-500">
           {format(new Date(), 'EEEE, MMMM d')}
         </p>
       </div>
@@ -136,21 +136,21 @@ export default function Dashboard() {
           icon={ListChecks}
           label="Open tasks"
           value={openTaskCount}
-          accent="bg-indigo-500/15 text-indigo-400"
+          accent="bg-indigo-500/15 text-indigo-600 dark:text-indigo-400"
         />
         <StatCard
           icon={Flame}
           label="Habits today"
           value={`${habitsDone}/${dailyHabits.length}`}
           sub="checked in"
-          accent="bg-emerald-500/15 text-emerald-400"
+          accent="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
         />
         <StatCard
           icon={Timer}
           label="Focus today"
           value={focusLabel}
           sub={`${stats.sessionsToday} session${stats.sessionsToday === 1 ? '' : 's'}`}
-          accent="bg-sky-500/15 text-sky-400"
+          accent="bg-sky-500/15 text-sky-600 dark:text-sky-400"
         />
         <StatCard
           icon={Wallet}
@@ -159,8 +159,8 @@ export default function Dashboard() {
           sub={`${formatMoney(monthIncome)} in · ${formatMoney(monthExpense)} out`}
           accent={
             monthBalance >= 0
-              ? 'bg-amber-500/15 text-amber-400'
-              : 'bg-rose-500/15 text-rose-400'
+              ? 'bg-amber-500/15 text-amber-600 dark:text-amber-400'
+              : 'bg-rose-500/15 text-rose-600 dark:text-rose-400'
           }
         />
       </div>
@@ -168,18 +168,18 @@ export default function Dashboard() {
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="font-semibold text-slate-100">Up next</h2>
+            <h2 className="font-semibold text-fg-100">Up next</h2>
             <Link
               to="/tasks"
-              className="flex items-center gap-1 text-sm text-indigo-400 hover:text-indigo-300"
+              className="flex items-center gap-1 text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300"
             >
               All tasks <ArrowRight size={14} />
             </Link>
           </div>
           {loading ? (
-            <p className="text-sm text-slate-500">Loading…</p>
+            <p className="text-sm text-fg-500">Loading…</p>
           ) : todoTasks.length === 0 ? (
-            <p className="py-6 text-center text-sm text-slate-500">
+            <p className="py-6 text-center text-sm text-fg-500">
               Nothing pending. Nice work! 🎉
             </p>
           ) : (
@@ -189,7 +189,7 @@ export default function Dashboard() {
                   key={t._id}
                   className="flex items-center gap-3 rounded-lg bg-ink-850 px-3 py-2.5"
                 >
-                  <span className="min-w-0 flex-1 truncate text-sm text-slate-200">
+                  <span className="min-w-0 flex-1 truncate text-sm text-fg-200">
                     {t.title}
                   </span>
                   <Badge className={TYPE_STYLES[t.type]}>
@@ -206,18 +206,18 @@ export default function Dashboard() {
 
         <Card>
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="font-semibold text-slate-100">Daily habits</h2>
+            <h2 className="font-semibold text-fg-100">Daily habits</h2>
             <Link
               to="/tasks"
-              className="flex items-center gap-1 text-sm text-indigo-400 hover:text-indigo-300"
+              className="flex items-center gap-1 text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300"
             >
               Manage <ArrowRight size={14} />
             </Link>
           </div>
           {loading ? (
-            <p className="text-sm text-slate-500">Loading…</p>
+            <p className="text-sm text-fg-500">Loading…</p>
           ) : dailyHabits.length === 0 ? (
-            <p className="py-6 text-center text-sm text-slate-500">
+            <p className="py-6 text-center text-sm text-fg-500">
               No daily habits yet. Add one from the Tasks page.
             </p>
           ) : (
@@ -241,13 +241,13 @@ export default function Dashboard() {
                     </button>
                     <span
                       className={`min-w-0 flex-1 truncate text-sm ${
-                        done ? 'text-slate-500 line-through' : 'text-slate-200'
+                        done ? 'text-fg-500 line-through' : 'text-fg-200'
                       }`}
                     >
                       {t.title}
                     </span>
                     {t.streak > 0 && (
-                      <Badge className="bg-orange-500/15 text-orange-300">
+                      <Badge className="bg-orange-500/15 text-orange-700 dark:text-orange-300">
                         <Flame size={12} className="mr-0.5" /> {t.streak}
                       </Badge>
                     )}

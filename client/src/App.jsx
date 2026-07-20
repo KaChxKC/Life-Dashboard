@@ -9,8 +9,8 @@ import Budget from './pages/Budget';
 
 function Loader() {
   return (
-    <div className="flex h-screen items-center justify-center text-slate-400">
-      <div className="h-8 w-8 animate-spin rounded-full border-2 border-slate-600 border-t-indigo-500" />
+    <div className="flex h-screen items-center justify-center text-fg-400">
+      <div className="h-8 w-8 animate-spin rounded-full border-2 border-ink-600 border-t-indigo-500" />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { LayoutDashboard, ListChecks, Timer, Wallet } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 
 const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
@@ -13,6 +14,7 @@ const features = [
 
 export default function Login() {
   const { loginWithGoogle } = useAuth();
+  const { theme } = useTheme();
   const [error, setError] = useState('');
 
   const handleSuccess = async (cred) => {
@@ -32,17 +34,17 @@ export default function Login() {
             <LayoutDashboard size={22} />
           </div>
           <div>
-            <h1 className="text-xl font-semibold text-slate-100">
+            <h1 className="text-xl font-semibold text-fg-100">
               Life Dashboard
             </h1>
-            <p className="text-sm text-slate-500">Your day, in one place</p>
+            <p className="text-sm text-fg-500">Your day, in one place</p>
           </div>
         </div>
 
         <ul className="mb-8 space-y-3">
           {features.map(({ icon: Icon, text }) => (
-            <li key={text} className="flex items-center gap-3 text-sm text-slate-300">
-              <Icon size={18} className="shrink-0 text-indigo-400" />
+            <li key={text} className="flex items-center gap-3 text-sm text-fg-300">
+              <Icon size={18} className="shrink-0 text-indigo-600 dark:text-indigo-400" />
               {text}
             </li>
           ))}
@@ -53,13 +55,13 @@ export default function Login() {
             <GoogleLogin
               onSuccess={handleSuccess}
               onError={() => setError('Google sign-in failed. Please try again.')}
-              theme="filled_black"
+              theme={theme === 'dark' ? 'filled_black' : 'outline'}
               shape="pill"
               text="continue_with"
             />
           </div>
         ) : (
-          <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-4 text-sm text-amber-300">
+          <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-4 text-sm text-amber-700 dark:text-amber-300">
             Google sign-in isn't configured yet. Add{' '}
             <code className="rounded bg-black/30 px-1">VITE_GOOGLE_CLIENT_ID</code>{' '}
             to <code className="rounded bg-black/30 px-1">client/.env</code> and
@@ -68,7 +70,7 @@ export default function Login() {
         )}
 
         {error && (
-          <p className="mt-4 text-center text-sm text-red-400">{error}</p>
+          <p className="mt-4 text-center text-sm text-red-600 dark:text-red-400">{error}</p>
         )}
       </div>
     </div>

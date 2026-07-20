@@ -176,8 +176,8 @@ export default function Budget() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-100">Budget</h1>
-          <p className="text-sm text-slate-500">
+          <h1 className="text-2xl font-semibold text-fg-100">Budget</h1>
+          <p className="text-sm text-fg-500">
             Track income and expenses to see where you stand.
           </p>
         </div>
@@ -188,33 +188,33 @@ export default function Budget() {
 
       <div className="mb-6 grid gap-4 md:grid-cols-3">
         <Card>
-          <div className="flex items-center gap-2 text-sm text-slate-500">
-            <ArrowUpRight size={16} className="text-emerald-400" /> Income this
+          <div className="flex items-center gap-2 text-sm text-fg-500">
+            <ArrowUpRight size={16} className="text-emerald-600 dark:text-emerald-400" /> Income this
             month
           </div>
-          <p className="mt-1 text-2xl font-semibold text-emerald-400">
+          <p className="mt-1 text-2xl font-semibold text-emerald-600 dark:text-emerald-400">
             {formatMoney(income)}
           </p>
         </Card>
         <Card>
-          <div className="flex items-center gap-2 text-sm text-slate-500">
-            <ArrowDownRight size={16} className="text-rose-400" /> Expenses this
+          <div className="flex items-center gap-2 text-sm text-fg-500">
+            <ArrowDownRight size={16} className="text-rose-600 dark:text-rose-400" /> Expenses this
             month
           </div>
-          <p className="mt-1 text-2xl font-semibold text-rose-400">
+          <p className="mt-1 text-2xl font-semibold text-rose-600 dark:text-rose-400">
             {formatMoney(expenses)}
           </p>
         </Card>
         <Card>
-          <p className="text-sm text-slate-500">Balance this month</p>
+          <p className="text-sm text-fg-500">Balance this month</p>
           <p
             className={`mt-1 text-2xl font-semibold ${
-              balance >= 0 ? 'text-slate-100' : 'text-rose-400'
+              balance >= 0 ? 'text-fg-100' : 'text-rose-600 dark:text-rose-400'
             }`}
           >
             {formatMoney(balance)}
           </p>
-          <p className="mt-0.5 text-xs text-slate-500">
+          <p className="mt-0.5 text-xs text-fg-500">
             {balance >= 0 ? 'Saved so far' : 'Over budget'}
           </p>
         </Card>
@@ -222,7 +222,7 @@ export default function Budget() {
 
       {byCategory.length > 0 && (
         <Card className="mb-6">
-          <p className="mb-2 text-sm text-slate-500">
+          <p className="mb-2 text-sm text-fg-500">
             Expenses by category (this month)
           </p>
           <div className="flex flex-col items-center gap-4 sm:flex-row">
@@ -247,10 +247,10 @@ export default function Budget() {
                   <Tooltip
                     formatter={(v) => formatMoney(v)}
                     contentStyle={{
-                      background: '#151b2e',
-                      border: '1px solid #263049',
+                      background: 'var(--color-ink-850)',
+                      border: '1px solid var(--color-ink-700)',
                       borderRadius: 8,
-                      color: '#e5e9f0',
+                      color: 'var(--color-fg-100)',
                     }}
                   />
                 </PieChart>
@@ -262,7 +262,7 @@ export default function Budget() {
                   key={c.name}
                   className="flex items-center justify-between text-sm"
                 >
-                  <span className="flex items-center gap-2 text-slate-400">
+                  <span className="flex items-center gap-2 text-fg-400">
                     <span
                       className="h-2.5 w-2.5 rounded-full"
                       style={{
@@ -271,7 +271,7 @@ export default function Budget() {
                     />
                     {c.name}
                   </span>
-                  <span className="text-slate-300">{formatMoney(c.value)}</span>
+                  <span className="text-fg-300">{formatMoney(c.value)}</span>
                 </li>
               ))}
             </ul>
@@ -287,7 +287,7 @@ export default function Budget() {
             className={`rounded-full px-3.5 py-1.5 text-sm font-medium ${
               filter === f.value
                 ? 'bg-indigo-500 text-white'
-                : 'bg-ink-800 text-slate-400 hover:text-slate-200'
+                : 'bg-ink-800 text-fg-400 hover:text-fg-200'
             }`}
           >
             {f.label}
@@ -296,7 +296,7 @@ export default function Budget() {
       </div>
 
       {loading ? (
-        <p className="text-sm text-slate-500">Loading…</p>
+        <p className="text-sm text-fg-500">Loading…</p>
       ) : visible.length === 0 ? (
         <EmptyState
           icon={Wallet}
@@ -321,16 +321,16 @@ export default function Budget() {
                 )}
               </span>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium text-slate-200">
+                <p className="truncate text-sm font-medium text-fg-200">
                   {t.note || t.category}
                 </p>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-fg-500">
                   {t.category} · {format(new Date(t.date), 'MMM d, yyyy')}
                 </p>
               </div>
               <span
                 className={`font-semibold ${
-                  isIncome(t) ? 'text-emerald-400' : 'text-slate-100'
+                  isIncome(t) ? 'text-emerald-600 dark:text-emerald-400' : 'text-fg-100'
                 }`}
               >
                 {isIncome(t) ? '+' : '−'}
@@ -339,13 +339,13 @@ export default function Budget() {
               <div className="flex shrink-0 gap-1 opacity-0 transition-opacity group-hover:opacity-100">
                 <button
                   onClick={() => openEdit(t)}
-                  className="rounded-md p-1.5 text-slate-500 hover:bg-ink-800 hover:text-slate-200"
+                  className="rounded-md p-1.5 text-fg-500 hover:bg-ink-800 hover:text-fg-200"
                 >
                   <Pencil size={16} />
                 </button>
                 <button
                   onClick={() => remove(t)}
-                  className="rounded-md p-1.5 text-slate-500 hover:bg-ink-800 hover:text-red-400"
+                  className="rounded-md p-1.5 text-fg-500 hover:bg-ink-800 hover:text-red-600 dark:hover:text-red-400"
                 >
                   <Trash2 size={16} />
                 </button>
@@ -370,9 +370,9 @@ export default function Budget() {
                   className={`flex-1 rounded-md px-3 py-1.5 text-sm font-medium capitalize transition-colors ${
                     form.type === type
                       ? type === 'income'
-                        ? 'bg-emerald-500/20 text-emerald-300'
-                        : 'bg-rose-500/20 text-rose-300'
-                      : 'text-slate-500 hover:text-slate-300'
+                        ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300'
+                        : 'bg-rose-500/20 text-rose-700 dark:text-rose-300'
+                      : 'text-fg-500 hover:text-fg-300'
                   }`}
                 >
                   {type}
