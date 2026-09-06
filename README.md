@@ -1,5 +1,9 @@
 # Life Dashboard
 
+**Live demo → https://life-dashboard-3v8u.onrender.com/**
+
+> Heads up: the demo is hosted on Render's free tier, which spins down after periods of inactivity. The first visit can take up to a minute to wake the server, so if you see a blank page give it a moment and refresh — it's not broken, just waking up.
+
 A personal dashboard I built to keep my day organized in one place - tasks, a pomodoro timer, and an expense tracker. Made with the MERN stack (MongoDB, Express, React, Node) and Tailwind CSS, with Google login.
 
 ## What it does
