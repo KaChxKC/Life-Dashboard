@@ -6,9 +6,9 @@ import { Button, Modal, Field, inputClass } from '../components/ui';
 const DEFAULTS = { focus: 25, short: 5, long: 15, longEvery: 4 };
 
 const MODES = {
-  focus: { label: 'Focus', accent: 'text-indigo-600 dark:text-indigo-400', ring: 'stroke-indigo-500' },
-  short: { label: 'Short Break', accent: 'text-emerald-600 dark:text-emerald-400', ring: 'stroke-emerald-500' },
-  long: { label: 'Long Break', accent: 'text-sky-600 dark:text-sky-400', ring: 'stroke-sky-500' },
+  focus: { label: 'Focus', accent: 'text-accent', ring: 'text-accent [stroke:var(--accent)]' },
+  short: { label: 'Short Break', accent: 'text-emerald-600 dark:text-emerald-400', ring: 'stroke-emerald-500 text-emerald-500 dark:text-emerald-400' },
+  long: { label: 'Long Break', accent: 'text-sky-600 dark:text-sky-400', ring: 'stroke-sky-500 text-sky-500 dark:text-sky-400' },
 };
 
 const loadSettings = () => {
@@ -169,11 +169,14 @@ export default function Pomodoro() {
               stroke="currentColor"
               strokeDasharray={C}
               strokeDashoffset={C * (1 - progress)}
-              style={{ transition: 'stroke-dashoffset 0.5s linear' }}
+              style={{
+                transition: 'stroke-dashoffset 0.5s linear',
+                filter: 'drop-shadow(0 0 8px currentColor)',
+              }}
             />
           </svg>
           <div className="text-center">
-            <div className="text-6xl font-bold tabular-nums text-fg-100">
+            <div className="font-display text-6xl font-bold tabular-nums text-fg-100">
               {mm}:{ss}
             </div>
             <div className={`mt-1 text-sm font-medium ${MODES[mode].accent}`}>
@@ -192,7 +195,7 @@ export default function Pomodoro() {
           </button>
           <button
             onClick={() => setRunning((r) => !r)}
-            className="flex h-16 w-16 items-center justify-center rounded-full bg-indigo-500 text-white hover:bg-indigo-400"
+            className="flex h-16 w-16 items-center justify-center rounded-full bg-grad text-[var(--accent-contrast)] shadow-lg transition-all duration-200 hover:brightness-105 active:scale-95"
           >
             {running ? <Pause size={26} /> : <Play size={26} className="ml-1" />}
           </button>

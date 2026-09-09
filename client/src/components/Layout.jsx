@@ -24,89 +24,72 @@ export default function Layout() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="flex h-screen overflow-hidden">
-      <aside className="flex w-16 flex-col border-r border-ink-800 bg-ink-900 py-4 md:w-60">
-        <div className="mb-6 flex items-center gap-2 px-3 md:px-5">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-500 font-bold text-white">
-            L
-          </div>
-          <span className="hidden text-lg font-semibold text-fg-100 md:block">
-            Life
-          </span>
-        </div>
-
-        <nav className="flex flex-1 flex-col gap-1 px-2 md:px-3">
-          {nav.map(({ to, label, icon: Icon, end }) => (
-            <NavLink
-              key={to}
-              to={to}
-              end={end}
-              className={({ isActive }) =>
-                `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
-                  isActive
-                    ? 'bg-indigo-500/15 text-indigo-700 dark:text-indigo-300'
-                    : 'text-fg-400 hover:bg-ink-800 hover:text-fg-200'
-                }`
-              }
-            >
-              <Icon size={20} className="shrink-0" />
-              <span className="hidden md:block">{label}</span>
-            </NavLink>
-          ))}
-        </nav>
-
-        <div className="px-2 md:px-3">
-          <button
-            onClick={toggleTheme}
-            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-fg-400 transition-colors hover:bg-ink-800 hover:text-fg-200"
+    <div className="flex min-h-screen flex-col">
+      <header className="sticky top-0 z-20 border-b border-ink-800 bg-ink-950/80 backdrop-blur">
+        <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 md:px-6">
+          <NavLink
+            to="/"
+            className="mr-1 shrink-0 font-display text-lg font-bold tracking-tight text-fg-100"
           >
-            {theme === 'dark' ? (
-              <Sun size={20} className="shrink-0" />
-            ) : (
-              <Moon size={20} className="shrink-0" />
-            )}
-            <span className="hidden md:block">
-              {theme === 'dark' ? 'Light mode' : 'Dark mode'}
-            </span>
-          </button>
-        </div>
+            Life <span className="text-accent">Dashboard</span>
+          </NavLink>
 
-        <div className="mt-auto border-t border-ink-800 px-2 pt-3 md:px-3">
-          <div className="flex items-center gap-3 rounded-lg px-2 py-2">
+          <nav className="flex flex-1 items-center gap-1 overflow-x-auto">
+            {nav.map(({ to, label, icon: Icon, end }) => (
+              <NavLink
+                key={to}
+                to={to}
+                end={end}
+                className={({ isActive }) =>
+                  `flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'bg-accent-soft text-accent'
+                      : 'text-fg-400 hover:bg-ink-800 hover:text-fg-100'
+                  }`
+                }
+              >
+                <Icon size={17} className="shrink-0" />
+                <span className="hidden sm:block">{label}</span>
+              </NavLink>
+            ))}
+          </nav>
+
+          <div className="flex shrink-0 items-center gap-1">
+            <button
+              onClick={toggleTheme}
+              title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              className="flex h-9 w-9 items-center justify-center rounded-lg text-fg-400 transition-colors hover:bg-ink-800 hover:text-fg-100"
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
             {user?.picture ? (
               <img
                 src={user.picture}
                 alt=""
                 referrerPolicy="no-referrer"
-                className="h-8 w-8 shrink-0 rounded-full"
+                className="h-8 w-8 rounded-full ring-1 ring-ink-700"
               />
             ) : (
-              <div className="h-8 w-8 shrink-0 rounded-full bg-ink-700" />
+              <div className="h-8 w-8 rounded-full bg-ink-700" />
             )}
-            <div className="hidden min-w-0 flex-1 md:block">
-              <p className="truncate text-sm font-medium text-fg-200">
-                {user?.name}
-              </p>
-              <p className="truncate text-xs text-fg-500">{user?.email}</p>
-            </div>
             <button
               onClick={logout}
               title="Log out"
-              className="hidden rounded-md p-1.5 text-fg-500 hover:bg-ink-800 hover:text-red-600 dark:hover:text-red-400 md:block"
+              className="flex h-9 w-9 items-center justify-center rounded-lg text-fg-400 transition-colors hover:bg-ink-800 hover:text-red-500 dark:hover:text-red-400"
             >
               <LogOut size={18} />
             </button>
           </div>
         </div>
-      </aside>
+      </header>
 
-      <main className="flex flex-1 flex-col overflow-y-auto">
-        <div className="mx-auto w-full max-w-6xl flex-1 px-5 py-6 md:px-8 md:py-8">
+      <main className="flex-1">
+        <div className="mx-auto w-full max-w-6xl px-4 py-6 md:px-6 md:py-8">
           <Outlet />
         </div>
-        <Footer />
       </main>
+
+      <Footer />
     </div>
   );
 }

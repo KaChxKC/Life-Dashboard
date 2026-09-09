@@ -187,29 +187,29 @@ export default function Budget() {
       </div>
 
       <div className="mb-6 grid gap-4 md:grid-cols-3">
-        <Card>
+        <Card className="glow-card">
           <div className="flex items-center gap-2 text-sm text-fg-500">
             <ArrowUpRight size={16} className="text-emerald-600 dark:text-emerald-400" /> Income this
             month
           </div>
-          <p className="mt-1 text-2xl font-semibold text-emerald-600 dark:text-emerald-400">
+          <p className="mt-1 font-display text-3xl font-bold tracking-tight text-emerald-600 dark:text-emerald-400">
             {formatMoney(income)}
           </p>
         </Card>
-        <Card>
+        <Card className="glow-card">
           <div className="flex items-center gap-2 text-sm text-fg-500">
             <ArrowDownRight size={16} className="text-rose-600 dark:text-rose-400" /> Expenses this
             month
           </div>
-          <p className="mt-1 text-2xl font-semibold text-rose-600 dark:text-rose-400">
+          <p className="mt-1 font-display text-3xl font-bold tracking-tight text-rose-600 dark:text-rose-400">
             {formatMoney(expenses)}
           </p>
         </Card>
-        <Card>
+        <Card className="glow-card">
           <p className="text-sm text-fg-500">Balance this month</p>
           <p
-            className={`mt-1 text-2xl font-semibold ${
-              balance >= 0 ? 'text-fg-100' : 'text-rose-600 dark:text-rose-400'
+            className={`mt-1 font-display text-3xl font-bold tracking-tight ${
+              balance >= 0 ? 'text-gradient' : 'text-rose-600 dark:text-rose-400'
             }`}
           >
             {formatMoney(balance)}
@@ -286,7 +286,7 @@ export default function Budget() {
             onClick={() => setFilter(f.value)}
             className={`rounded-full px-3.5 py-1.5 text-sm font-medium ${
               filter === f.value
-                ? 'bg-indigo-500 text-white'
+                ? 'bg-accent'
                 : 'bg-ink-800 text-fg-400 hover:text-fg-200'
             }`}
           >

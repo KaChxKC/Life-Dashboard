@@ -143,7 +143,7 @@ export default function Tasks() {
             onClick={() => setFilter(f.value)}
             className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors ${
               filter === f.value
-                ? 'bg-indigo-500 text-white'
+                ? 'bg-accent'
                 : 'bg-ink-800 text-fg-400 hover:text-fg-200'
             }`}
           >
@@ -174,7 +174,7 @@ export default function Tasks() {
                   className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border transition-colors ${
                     done
                       ? 'border-emerald-500 bg-emerald-500 text-white'
-                      : 'border-ink-600 hover:border-indigo-400'
+                      : 'border-ink-600 hover:border-accent'
                   }`}
                 >
                   {done && <Check size={14} strokeWidth={3} />}

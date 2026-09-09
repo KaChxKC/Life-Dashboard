@@ -27,13 +27,14 @@ export function Button({
   ...props
 }) {
   const variants = {
-    primary: 'bg-indigo-500 text-white hover:bg-indigo-400',
+    primary:
+      'bg-grad text-[var(--accent-contrast)] font-semibold shadow-lg hover:brightness-105',
     ghost: 'bg-ink-800 text-fg-200 hover:bg-ink-700',
-    danger: 'bg-red-500/90 text-white hover:bg-red-500',
+    danger: 'bg-red-500/90 text-white hover:bg-red-500 hover:brightness-110',
   };
   return (
     <button
-      className={`inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50 ${variants[variant]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 active:scale-95 disabled:opacity-50 ${variants[variant]} ${className}`}
       {...props}
     >
       {children}
@@ -53,7 +54,7 @@ export function Field({ label, children }) {
 }
 
 export const inputClass =
-  'w-full rounded-lg border border-ink-700 bg-ink-850 px-3 py-2 text-sm text-fg-100 placeholder-fg-500 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500';
+  'w-full rounded-lg border border-ink-700 bg-ink-850 px-3 py-2 text-sm text-fg-100 placeholder-fg-500 outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]';
 
 export function Modal({ title, onClose, children }) {
   return (

@@ -30,7 +30,7 @@ export default function Login() {
     <div className="flex min-h-screen items-center justify-center px-5">
       <div className="w-full max-w-md rounded-2xl border border-ink-800 bg-ink-900 p-8 shadow-xl">
         <div className="mb-6 flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-500 text-white">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-grad text-[var(--accent-contrast)]">
             <LayoutDashboard size={22} />
           </div>
           <div>
@@ -44,7 +44,7 @@ export default function Login() {
         <ul className="mb-8 space-y-3">
           {features.map(({ icon: Icon, text }) => (
             <li key={text} className="flex items-center gap-3 text-sm text-fg-300">
-              <Icon size={18} className="shrink-0 text-indigo-600 dark:text-indigo-400" />
+              <Icon size={18} className="shrink-0 text-accent" />
               {text}
             </li>
           ))}

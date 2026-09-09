@@ -25,7 +25,8 @@ const isDoneToday = (t) =>
 
 function StatCard({ icon: Icon, label, value, sub, accent }) {
   return (
-    <Card className="flex items-center gap-4">
+    <Card className="glow-card relative flex items-center gap-4 overflow-hidden">
+      <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent opacity-50" />
       <div
         className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${accent}`}
       >
@@ -33,7 +34,9 @@ function StatCard({ icon: Icon, label, value, sub, accent }) {
       </div>
       <div>
         <p className="text-sm text-fg-500">{label}</p>
-        <p className="text-xl font-semibold text-fg-100">{value}</p>
+        <p className="font-display text-2xl font-bold tracking-tight text-fg-100">
+          {value}
+        </p>
         {sub && <p className="text-xs text-fg-500">{sub}</p>}
       </div>
     </Card>
@@ -136,7 +139,7 @@ export default function Dashboard() {
           icon={ListChecks}
           label="Open tasks"
           value={openTaskCount}
-          accent="bg-indigo-500/15 text-indigo-600 dark:text-indigo-400"
+          accent="bg-accent-soft text-accent"
         />
         <StatCard
           icon={Flame}
@@ -171,7 +174,7 @@ export default function Dashboard() {
             <h2 className="font-semibold text-fg-100">Up next</h2>
             <Link
               to="/tasks"
-              className="flex items-center gap-1 text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300"
+              className="flex items-center gap-1 text-sm text-accent transition-opacity hover:opacity-75"
             >
               All tasks <ArrowRight size={14} />
             </Link>
@@ -209,7 +212,7 @@ export default function Dashboard() {
             <h2 className="font-semibold text-fg-100">Daily habits</h2>
             <Link
               to="/tasks"
-              className="flex items-center gap-1 text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300"
+              className="flex items-center gap-1 text-sm text-accent transition-opacity hover:opacity-75"
             >
               Manage <ArrowRight size={14} />
             </Link>
