@@ -114,13 +114,13 @@ export default function Dashboard() {
   const focusHrs = Math.floor(stats.focusToday / 60);
   const focusMins = stats.focusToday % 60;
   const focusLabel =
-    focusHrs > 0 ? `${focusHrs}h ${focusMins}m` : `${focusMins}m`;
+    focusHrs > 0 ? `${focusHrs} hr ${focusMins} min` : `${focusMins} min`;
 
   const greeting = (() => {
     const h = new Date().getHours();
-    if (h < 12) return 'Good morning';
-    if (h < 18) return 'Good afternoon';
-    return 'Good evening';
+    if (h < 12) return 'Good Morning';
+    if (h < 18) return 'Good Afternoon';
+    return 'Good Evening';
   })();
 
   return (
@@ -137,27 +137,27 @@ export default function Dashboard() {
       <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
           icon={ListChecks}
-          label="Open tasks"
+          label="Open Tasks"
           value={openTaskCount}
           accent="bg-accent-soft text-accent"
         />
         <StatCard
           icon={Flame}
-          label="Habits today"
+          label="Habits Today"
           value={`${habitsDone}/${dailyHabits.length}`}
           sub="checked in"
           accent="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
         />
         <StatCard
           icon={Timer}
-          label="Focus today"
+          label="Focus Today"
           value={focusLabel}
           sub={`${stats.sessionsToday} session${stats.sessionsToday === 1 ? '' : 's'}`}
           accent="bg-sky-500/15 text-sky-600 dark:text-sky-400"
         />
         <StatCard
           icon={Wallet}
-          label="Balance this month"
+          label="Balance This Month"
           value={formatMoney(monthBalance)}
           sub={`${formatMoney(monthIncome)} in · ${formatMoney(monthExpense)} out`}
           accent={
