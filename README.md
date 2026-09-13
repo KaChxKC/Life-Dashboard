@@ -1,8 +1,8 @@
 # Life Dashboard
 
-**Live demo → https://life-dashboard-3v8u.onrender.com/**
+**Live demo → https://life-dashboard-kc.vercel.app**
 
-> Heads up: the demo is hosted on Render's free tier, which spins down after periods of inactivity. The first visit can take up to a minute to wake the server, so if you see a blank page give it a moment and refresh — it's not broken, just waking up.
+> Heads up: the frontend loads instantly, but the backend runs on Render's free tier, which spins down after periods of inactivity. The first action after opening (signing in or loading data) can take up to a minute while the server wakes up — if it seems to hang, give it a moment. It's not broken, just waking up.
 
 A personal dashboard I built to keep my day organized in one place - tasks, a pomodoro timer, and an expense tracker. Made with the MERN stack (MongoDB, Express, React, Node) and Tailwind CSS, with Google login.
 
@@ -61,6 +61,17 @@ Life/
    ```
 
    The API runs on http://localhost:5000 and the app on http://localhost:5173.
+
+   Locally you don't need `VITE_API_URL` — Vite's dev server proxies `/api` to the backend automatically.
+
+## Deployment
+
+The app is deployed as two separate services:
+
+- **Frontend** → Vercel (root directory `client`). Set `VITE_GOOGLE_CLIENT_ID` and `VITE_API_URL` (the backend's URL) as build-time env vars.
+- **Backend** → Render (a Node web service running `server/`). Set `MONGODB_URI`, `JWT_SECRET`, `GOOGLE_CLIENT_ID`, and `CLIENT_URL` (the Vercel origin, so CORS allows it).
+
+The frontend reads `VITE_API_URL` to know where the API lives, and the backend allows requests from the origins listed in `CLIENT_URL`. The deployed frontend's URL is also added to the Google OAuth client's authorized JavaScript origins.
 
 ## Notes
 
