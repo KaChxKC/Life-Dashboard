@@ -15,7 +15,21 @@ const clientDist = path.join(__dirname, '../../client/dist');
 
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173' }));
+const allowedOrigins = [
+  'http://localhost:5173',
+  ...(process.env.CLIENT_URL
+    ? process.env.CLIENT_URL.split(',').map((s) => s.trim()).filter(Boolean)
+    : []),
+];
+
+app.use(
+  cors({
+    origin(origin, cb) {
+      if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+      return cb(new Error('Not allowed by CORS'));
+    },
+  })
+);
 app.use(express.json());
 
 app.get('/api/health', (req, res) => res.json({ ok: true }));
