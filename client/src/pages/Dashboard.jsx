@@ -23,23 +23,29 @@ import { Card, Badge } from '../components/ui';
 const isDoneToday = (t) =>
   t.type === 'daily' ? t.lastCompletedDate === todayStr() : t.completed;
 
-function StatCard({ icon: Icon, label, value, sub, accent }) {
+function StatCard({ icon: Icon, label, value, sub, accent, to }) {
   return (
-    <Card className="glow-card relative flex items-center gap-4 overflow-hidden">
-      <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent opacity-50" />
-      <div
-        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${accent}`}
-      >
-        <Icon size={22} />
-      </div>
-      <div>
-        <p className="text-sm text-fg-500">{label}</p>
-        <p className="font-display text-2xl font-bold tracking-tight text-fg-100">
-          {value}
-        </p>
-        {sub && <p className="text-xs text-fg-500">{sub}</p>}
-      </div>
-    </Card>
+    <Link
+      to={to}
+      aria-label={`${label}: open ${to.slice(1)}`}
+      className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+    >
+      <Card className="glow-card relative flex h-full items-center gap-4 overflow-hidden">
+        <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent opacity-50" />
+        <div
+          className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${accent}`}
+        >
+          <Icon size={22} />
+        </div>
+        <div>
+          <p className="text-sm text-fg-500">{label}</p>
+          <p className="font-display text-2xl font-bold tracking-tight text-fg-100">
+            {value}
+          </p>
+          {sub && <p className="text-xs text-fg-500">{sub}</p>}
+        </div>
+      </Card>
+    </Link>
   );
 }
 
@@ -138,12 +144,14 @@ export default function Dashboard() {
         <StatCard
           icon={ListChecks}
           label="Open Tasks"
+          to="/tasks"
           value={openTaskCount}
           accent="bg-accent-soft text-accent"
         />
         <StatCard
           icon={Flame}
           label="Habits Today"
+          to="/tasks"
           value={`${habitsDone}/${dailyHabits.length}`}
           sub="checked in"
           accent="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
@@ -151,6 +159,7 @@ export default function Dashboard() {
         <StatCard
           icon={Timer}
           label="Focus Today"
+          to="/pomodoro"
           value={focusLabel}
           sub={`${stats.sessionsToday} session${stats.sessionsToday === 1 ? '' : 's'}`}
           accent="bg-sky-500/15 text-sky-600 dark:text-sky-400"
@@ -158,6 +167,7 @@ export default function Dashboard() {
         <StatCard
           icon={Wallet}
           label="Balance This Month"
+          to="/budget"
           value={formatMoney(monthBalance)}
           sub={`${formatMoney(monthIncome)} in · ${formatMoney(monthExpense)} out`}
           accent={
